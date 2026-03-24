@@ -53,4 +53,11 @@ docker run --name journey_family_test -e POSTGRES_DB=journey_family_test -e POST
 ```
 
 
-# journey-family-membership-backend
+## journey-family-membership-backend sample data
+
+# Using psql
+sudo -u postgres psql < seed-database.sql
+
+# Or connect and run interactively
+sudo -u postgres psql 
+# Then type: \i seed-database.sql

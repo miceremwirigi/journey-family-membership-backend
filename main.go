@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 	"github.com/miceremwirigi/journey-family-membership-backend/pkg/apis"
 	"github.com/miceremwirigi/journey-family-membership-backend/pkg/common/middlewares"
@@ -33,6 +34,13 @@ func main() {
 	}
 
 	app := fiber.New()
+
+	// In your main.go, add before routes:
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "http://localhost:3001",
+		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+		AllowMethods: "GET, POST, PUT, DELETE",
+	}))
 
 	// Repositories
 	memberRepo := repository.NewMemberRepository(db)
@@ -114,5 +122,5 @@ func main() {
 	eventsAPI.Put("/:id", middlewares.RoleAuthMiddleware("admin", "staff"), eventHandler.UpdateEvent)
 	eventsAPI.Delete("/:id", middlewares.RoleAuthMiddleware("admin"), eventHandler.DeleteEvent)
 
-	log.Fatal(app.Listen(":3001"))
+	log.Fatal(app.Listen(":3002"))
 }
