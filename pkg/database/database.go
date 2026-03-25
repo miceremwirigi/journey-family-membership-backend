@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/miceremwirigi/journey-family-membership-backend/pkg/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -22,8 +21,6 @@ func Connect() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	db.AutoMigrate(&models.Family{}, &models.SmallGroup{}, &models.Member{}, &models.Visitor{}, &models.Message{}, &models.Event{})
 
 	return db, nil
 }

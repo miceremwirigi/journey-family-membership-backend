@@ -47,17 +47,60 @@ go mod download
 go mod tidy
 ```
 
+## Testing
+
+To run the tests, use the following command:
+
+```bash
+go test ./...
+```
+
+To get the test coverage, run the following command:
+
+```bash
+go test -cover ./...
+```
+
+## Migrations
+
+To run the migrations, use the following commands:
+
+```bash
+go run cmd/migrations/up/up.go
+```
+
+To rollback the migrations, use the following command:
+
+```bash
+go run cmd/migrations/down/down.go
+```
+
 ```bash
 docker run --name journey_family_db -e POSTGRES_DB=journey_family -e POSTGRES_USER=journey_family -e POSTGRES_PASSWORD=journey_family -p 5434:5432 -d postgis/postgis
 docker run --name journey_family_test -e POSTGRES_DB=journey_family_test -e POSTGRES_USER=journey_family -e POSTGRES_PASSWORD=journey_family -p 5435:5432 -d postgis/postgis
 ```
 
 
-## journey-family-membership-backend sample data
+## Seeding the Database
 
-# Using psql
+**Note:** Make sure you have run the `up` migration before seeding the database.
+
+To seed the database with sample data, you can use one of the following methods:
+
+**Using `psql` directly:**
+
+```bash
 sudo -u postgres psql < seed-database.sql
+```
 
-# Or connect and run interactively
-sudo -u postgres psql 
-# Then type: \i seed-database.sql
+**Or connect and run interactively:**
+
+```bash
+sudo -u postgres psql
+```
+
+Then, in the `psql` prompt, type:
+
+```sql
+\i seed-database.sql
+```

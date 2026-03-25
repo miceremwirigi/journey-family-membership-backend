@@ -48,7 +48,7 @@ func (m *Member) CheckPassword(providedPassword string) error {
 type Family struct {
 	gorm.Model
 	Name    string
-	HeadID  uint
+	HeadID  *uint
 	Members []Member
 }
 
@@ -57,7 +57,7 @@ type SmallGroup struct {
 	Name        string
 	Zone        string
 	Location    string
-	LeaderID    uint
+	LeaderID    *uint
 	Description string
 	MeetingDay  string
 	MeetingTime string
